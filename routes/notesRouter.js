@@ -1,8 +1,9 @@
 const notes = require('express').Router();
+const fs = require('fs');
 
 
 notes.get('/', (req,res) => {
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+    readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 notes.post('/', (req, res) => {
@@ -16,6 +17,12 @@ notes.post('/', (req, res) => {
             text,
         };
 
-        //need to read/append here
+        //need to append here
+        fs.writeFile('../db/db.json', JSON.stringify(newNote))
+        res.json('Note sucessfully added!')
+    } else {
+        res.errored('Error in adding note')
     }
 })
+
+module.exports = notes;
