@@ -3,7 +3,7 @@ const path = require('path');
 const api = require('./routes/notesRouter')
 const htmlRoute = require('./routes/index')
 
-const PORT = 3002;      //using 3002 instead of 3001 because I'm testing 2 at once
+const PORT = 3001;     //changed, but keeping the text to the right as a reminder for running 2 at a time //using 3002 instead of 3001 because I'm testing 2 at once
 const app = express();
 
 // Middleware for parsing JSON and urlencoded form data
