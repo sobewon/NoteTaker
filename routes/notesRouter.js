@@ -1,12 +1,19 @@
 const notes = require('express').Router();
 const fs = require('fs');
+const path = require('path')
+const { noteDb } = require('../db/db.json')
+let newNoot = ''
 
 
-notes.get('/', (req,res) => {
-    readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
+notes.get('/notes', (req,res) => {
+    if(noteDb) {
+        res.json(noteDb);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
-notes.post('/', (req, res) => {
+notes.post('/notes', (req, res) => {
     console.log(req.body);
 
     const { title, text} =  req.body;
@@ -18,7 +25,7 @@ notes.post('/', (req, res) => {
         };
 
         //need to append here
-        fs.writeFile('../db/db.json', JSON.stringify(newNote))
+        fs.writeFile('./db/db.json', JSON.stringify(newNote))
         res.json('Note sucessfully added!')
     } else {
         res.errored('Error in adding note')
