@@ -2,18 +2,9 @@ const express = require('express');
 const path = require('path');
 const api = require('./routes/notesRouter')
 const htmlRoute = require('./routes/index')
-const cool = require('cool-ascii-faces')
 
-const PORT = 5001;     //changed, but keeping the text to the right as a reminder for running 2 at a time //using 3002 instead of 3001 because I'm testing 2 at once
+const PORT = process.env.PORT || 3001;     //changed, but keeping the text to the right as a reminder for running 2 at a time //using 3002 instead of 3001 because I'm testing 2 at once
 const app = express();
-
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
