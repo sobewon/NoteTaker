@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
-app.use('/', htmlRoute); //this was the problem, it's the route for the info
+app.use('/', htmlRoute); //this was the problem, it's the route for the info. ~6hr waste
 app.use(express.static('public'));
 
 app.get('/', (req, res) =>
